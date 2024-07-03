@@ -1,13 +1,17 @@
 <div class="todo-container">
-  <app-todo [todoData]="todoData1" (onClickIcon)="getTodoInfo($event)"></app-todo>
-  <app-todo [todoData]="todoData2" (onClickIcon)="getTodoInfo($event)"></app-todo>
-  <app-todo [todoData]="todoData3" (onClickIcon)="getTodoInfo($event)"></app-todo>
-  <app-todo [todoData]="todoData4" (onClickIcon)="getTodoInfo($event)"></app-todo>
-  <app-todo [todoData]="todoData5" (onClickIcon)="getTodoInfo($event)"></app-todo>
-  <app-todo [todoData]="todoData1" (onClickIcon)="getTodoInfo($event)"></app-todo>
-  <app-todo [todoData]="todoData2" (onClickIcon)="getTodoInfo($event)"></app-todo>
-  <app-todo [todoData]="todoData3" (onClickIcon)="getTodoInfo($event)"></app-todo>
-  <app-todo [todoData]="todoData4" (onClickIcon)="getTodoInfo($event)"></app-todo>
-  <app-todo [todoData]="todoData5" (onClickIcon)="getTodoInfo($event)"></app-todo>
-  <app-todo [todoData]="todoData6" (onClickIcon)="getTodoInfo($event)"></app-todo>
+  <app-todo
+    *ngFor="let todo of todoData;
+    let i = index;
+    trackBy: trackByFn
+    let f = first;
+    let l = last;
+    let odd = odd;
+    let even = even;
+    "
+    [todoData]="todo"
+    [first]="f"
+    (onClickIcon)="getTodoInfo($event)"
+  ></app-todo>
 </div>
+
+<button (click)="orderData()">Ordenar</button>

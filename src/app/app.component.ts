@@ -3,26 +3,34 @@ import { RouterOutlet } from '@angular/router';
 import { TodoComponent } from './pages/todo/todo.component';
 import { TODO_DATA } from '../assets/todo';
 import { NTodo } from './models/todo.model';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [
     RouterOutlet,
-    TodoComponent
+    TodoComponent,
+    CommonModule
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  todoData1= TODO_DATA[0];
-  todoData2= TODO_DATA[1];
-  todoData3= TODO_DATA[2];
-  todoData4= TODO_DATA[3];
-  todoData5= TODO_DATA[4];
-  todoData6= TODO_DATA[10];
+  title = 'angular-18-app';
+  todoData= TODO_DATA;
+
+  constructor() {}
 
   getTodoInfo(val: NTodo.TodoData){
     console.log('Click en icono: ', val);
+  }
+
+  trackByFn(_index: number, item: NTodo.TodoData){
+    return item.id;
+  }
+
+  orderData(){
+    this.todoData=this.todoData.sort((a, b) => a.priority - b.priority);
   }
 }

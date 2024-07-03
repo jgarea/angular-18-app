@@ -1,7 +1,7 @@
 <div
-    class="card-container"
-    *ngIf="todoData; else notCardInfo"
+    class="card-container {{first ? 'first' : ''}} {{last ? 'last' : ''}} {{odd ? 'odd' : ''}} {{even ? 'even' : ''}}"
 >
+@if (todoData) {
     <span class="icon-close" (click)="onClickIcon.emit(todoData)">x</span>
     <div class="card-body">
         <div class="card-content">
@@ -34,12 +34,8 @@
         </div>
         <span>{{todoData.progress}} %</span> 
     </section>    
-    {{todoData}}       
-</div>
 
-<ng-template #notCardInfo>
-    <div class="card-container">
-        <p>No hay información</p>
-    </div>
-    
-</ng-template>
+} @else {
+    <p>No hay datos</p>
+} 
+</div>
