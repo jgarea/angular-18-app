@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { TodoComponent } from './pages/todo/todo.component';
 import { TODO_DATA } from '../assets/todo';
 import { NTodo } from './models/todo.model';
 import { CommonModule } from '@angular/common';
+import { InputComponent } from './components/input/input.component';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +12,8 @@ import { CommonModule } from '@angular/common';
   imports: [
     RouterOutlet,
     TodoComponent,
-    CommonModule
+    CommonModule,
+    InputComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
@@ -20,8 +22,11 @@ export class AppComponent {
   title = 'angular-18-app';
   
   // todoData:NTodo.TodoData[]= [];
-  todoData:NTodo.TodoData[]= TODO_DATA;
-
+  // todoData:NTodo.TodoData[]= [TODO_DATA[0]];
+  todoData:NTodo.TodoData[]= TODO_DATA.filter(item => item.id < 2);
+//para seleccionar un elemento del DOM
+  // @ViewChild(TodoComponent,{read: ElementRef}) todo?: ElementRef;
+  @ViewChildren(TodoComponent,{read: ElementRef}) todo?: QueryList<ElementRef>;
   constructor() {}
 
   getTodoInfo(val: NTodo.TodoData){
@@ -34,5 +39,19 @@ export class AppComponent {
 
   orderData(){
     this.todoData=this.todoData.sort((a, b) => a.priority - b.priority);
+  }
+
+  selectTodo(){
+    // const todo = document.querySelectorAll('app-todo');
+    // console.log(todo);
+    // const items = this.todo?.map(item => item);
+    // console.log(items);
+    this.todo?.changes.subscribe(values => {
+      console.log(values);
+    })
+  }
+
+  addTodo(){
+    this.todoData=TODO_DATA.filter(item => item.id < 4);
   }
 }

@@ -1,7 +1,8 @@
-import { Component, EventEmitter, Input, LOCALE_ID, Output } from '@angular/core';
+import { Component, ContentChild, ContentChildren, ElementRef, EventEmitter, Input, LOCALE_ID, Output, QueryList, ViewChild } from '@angular/core';
 import { NTodo } from '../../models/todo.model';
 import { CommonModule,registerLocaleData } from '@angular/common';
 import es from '@angular/common/locales/es';
+import { InputComponent } from '../../components/input/input.component';
 registerLocaleData(es);
 
 @Component({
@@ -17,13 +18,15 @@ registerLocaleData(es);
   styleUrl: './todo.component.scss'
 })
 export class TodoComponent {
+
   @Input({required: true}) todoData!: NTodo.TodoData;
-  @Input() first!: boolean;
-  @Input() last!: boolean;
-  @Input() odd!: boolean;
-  @Input() even!: boolean;
   @Output() onClickIcon = new EventEmitter<NTodo.TodoData>();
 
+  // Para seleccionar el primer elemento
+  // @ContentChild('inputref') proyectedContent?:ElementRef<HTMLElement>;
+
+  // @ContentChildren(InputComponent,{read: ElementRef}) proyectedContent?:ElementRef<HTMLElement>;
+  @ContentChildren(InputComponent,{read: ElementRef}) proyectedContent?:QueryList<ElementRef>;
   get priority():string{
     switch(this.todoData.priority){
       case NTodo.Priority.LOW:
@@ -46,6 +49,12 @@ export class TodoComponent {
       return NTodo.RangeText.MEDIUM;
     } 
     return NTodo.RangeText.HIGH;
+  }
+
+  selectContent() {
+    // console.log(this.proyectedContent);
+    const elements = this.proyectedContent?.map(val => val);
+    console.log(elements);
   }
     
 }
