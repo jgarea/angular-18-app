@@ -18,7 +18,9 @@ import { CommonModule } from '@angular/common';
 })
 export class AppComponent {
   title = 'angular-18-app';
-  todoData= TODO_DATA;
+  
+  // todoData:NTodo.TodoData[]= [];
+  todoData:NTodo.TodoData[]= TODO_DATA;
 
   constructor() {}
 
