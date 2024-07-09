@@ -17,22 +17,19 @@ import { CommonModule } from '@angular/common';
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  title = 'angular-18-app';
-  
-  // todoData:NTodo.TodoData[]= [];
-  todoData:NTodo.TodoData[]= TODO_DATA;
+  todoData = TODO_DATA;
 
   constructor() {}
 
-  getTodoInfo(val: NTodo.TodoData){
-    console.log('Click en icono: ', val);
+  getTodoInfo(val: NTodo.TodoData) {
+    console.log(val);
   }
 
-  trackByFn(_index: number, item: NTodo.TodoData){
+  trackByFn(_index: number, item: NTodo.TodoData) {
     return item.id;
   }
 
-  orderData(){
-    this.todoData=this.todoData.sort((a, b) => a.priority - b.priority);
+  orderData() {
+    this.todoData.sort((a, b) => a.priority -  b.priority);
   }
 }
