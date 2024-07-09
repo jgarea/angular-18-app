@@ -1,13 +1,5 @@
 <div
     class="card-container"
-    [ngClass]="
-     {
-        'first': first,
-        'last': last,
-        'odd': odd,
-        'even': even
-     }
-    "
 >
 @if (todoData) {
     <span class="icon-close" (click)="onClickIcon.emit(todoData)">x</span>
