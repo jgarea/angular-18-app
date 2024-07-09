@@ -17,6 +17,7 @@ import { CommonModule } from '@angular/common';
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
+  title = '';
   todoData = TODO_DATA[0];
 
   constructor() {}

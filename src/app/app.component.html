@@ -1,10 +1,29 @@
-<div class="todo-container">
+@if (todoData) {
+  <div class="todo-container">
  
-      <app-todo
-          [todoData]="todoData"
-          (onClickIcon)="getTodoInfo($event)"
-      >
-      </app-todo>
+    <app-todo
+        [todoData]="todoData"
+        (onClickIcon)="getTodoInfo($event)"
+    >
+    <ng-template class="template-ref" [ngIf]="!todoData.hidden">
+      <div class="name">Alex</div>
+      <div class="last-name">Ramirez</div>
+      <div projected-content="todo">Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem velit veritatis tempora mollitia voluptas tenetur laboriosam saepe eum, officia laudantium perspiciatis quae earum totam corrupti repellat debitis voluptatum quasi natus?</div>
+    </ng-template>    
+    </app-todo>
 </div>
+} @else {
+<ng-container *ngTemplateOutlet="noTodo; context:{$implicit:'Alex',lastName:'Ale' }"></ng-container>
+}
+
+<ng-template #noTodo let-name let-lastName="lastName">
+  <div>No hay elementos</div>
+  <div>
+    nombre: {{name}}
+  </div>
+  <div>
+    apellido: {{lastName}}
+  </div>
+</ng-template>
 
 <!-- <button (click)="orderData()">Ordenar</button> -->
