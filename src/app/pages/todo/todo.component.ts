@@ -3,6 +3,7 @@ import { NTodo } from '../../models/todo.model';
 import { CommonModule,registerLocaleData } from '@angular/common';
 import es from '@angular/common/locales/es';
 import { InputComponent } from '../../components/input/input.component';
+import { TODO_DATA } from '../../../assets/todo';
 registerLocaleData(es);
 
 @Component({
@@ -64,7 +65,8 @@ export class TodoComponent implements OnChanges,OnInit,DoCheck,AfterContentInit,
   }
 
 
-  @Input({required: true}) todoData!: NTodo.TodoData;
+  // @Input({required: true}) todoData!: NTodo.TodoData;
+  @Input({required: true}) todoData: NTodo.TodoData= TODO_DATA[0];
   @Output() onClickIcon = new EventEmitter<NTodo.TodoData>();
   @ViewChild('divRef') divElement?:ElementRef;
 

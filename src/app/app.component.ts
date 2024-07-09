@@ -1,5 +1,5 @@
 import { Component, ElementRef, QueryList, ViewChild, ViewChildren } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 import { TodoComponent } from './pages/todo/todo.component';
 import { TODO_DATA } from '../assets/todo';
 import { NTodo } from './models/todo.model';
@@ -28,7 +28,9 @@ export class AppComponent {
 //para seleccionar un elemento del DOM
   // @ViewChild(TodoComponent,{read: ElementRef}) todo?: ElementRef;
   @ViewChildren(TodoComponent,{read: ElementRef}) todo?: QueryList<ElementRef>;
-  constructor() {}
+  constructor(
+    public router:Router
+  ) {  }
 
   getTodoInfo(val: NTodo.TodoData){
     console.log('Click en icono: ', val);
