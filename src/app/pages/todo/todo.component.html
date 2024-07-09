@@ -5,6 +5,7 @@
 <button (click)="selectContent()">Seleccionar contenido proyectado</button>
 <div
   class="card-container"
+  #divRef
 >
   @if (todoData) {
   <span class="icon-close" (click)="onClickIcon.emit(todoData)">x</span>

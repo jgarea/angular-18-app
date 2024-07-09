@@ -1,9 +1,12 @@
 <div class="todo-container">
-  @for (todo of todoData; track todo.id) {
-  <app-todo
-    [todoData]="todo"
+  <!-- <app-todo
+    [todoData]="todoData"
     (onClickIcon)="getTodoInfo($event)"
-    
+  > -->
+  <app-todo
+  *ngIf="todoData"
+    [todoData]="todoData"
+    (onClickIcon)="todoData = null"
   >
     <app-input #inputref placeholder="Nombres"></app-input>
     <app-input #inputref placeholder="Apellidos"></app-input>
@@ -12,9 +15,9 @@
     <textarea rows="5"></textarea>
   </div>
 </app-todo>
-  } @empty {
-  <p>No hay datos</p>
-  }
+
+<!-- <router-outlet></router-outlet> -->
+
   <!-- *ngFor="
       let todo of todoData;
       let i = index;
@@ -26,6 +29,7 @@
     " -->
 </div>
 <br>
+<br>
 <button (click)="orderData()">Ordenar</button>
 <button (click)="addTodo()">Agregar</button>
-<button (click)="selectTodo()">Seleccionar todo</button>
+<button (click)="change()">Modificar</button>

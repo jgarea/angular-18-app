@@ -23,7 +23,8 @@ export class AppComponent {
   
   // todoData:NTodo.TodoData[]= [];
   // todoData:NTodo.TodoData[]= [TODO_DATA[0]];
-  todoData:NTodo.TodoData[]= TODO_DATA.filter(item => item.id < 2);
+  // todoData:NTodo.TodoData[]= TODO_DATA.filter(item => item.id < 2);
+  todoData:any = TODO_DATA[0];
 //para seleccionar un elemento del DOM
   // @ViewChild(TodoComponent,{read: ElementRef}) todo?: ElementRef;
   @ViewChildren(TodoComponent,{read: ElementRef}) todo?: QueryList<ElementRef>;
@@ -38,20 +39,22 @@ export class AppComponent {
   }
 
   orderData(){
-    this.todoData=this.todoData.sort((a, b) => a.priority - b.priority);
+    // this.todoData=this.todoData.sort((a, b) => a.priority - b.priority);
   }
 
-  selectTodo(){
+  change(){
     // const todo = document.querySelectorAll('app-todo');
     // console.log(todo);
     // const items = this.todo?.map(item => item);
     // console.log(items);
-    this.todo?.changes.subscribe(values => {
-      console.log(values);
-    })
+    // this.todo?.changes.subscribe(values => {
+    //   console.log(values);
+    // })
+    this.todoData={...this.todoData, description: 'ngOnchanges'};
+
   }
 
   addTodo(){
-    this.todoData=TODO_DATA.filter(item => item.id < 4);
+    // this.todoData=TODO_DATA.filter(item => item.id < 4);
   }
 }
