@@ -1,9 +1,17 @@
+<div [appHighlighed]="false">Header</div>
+<br><br>
+<button (click)="highlighedDirective.onToggle()">Resaltar</button>
+<br><br>
+
 @if (todoData) {
   <div class="todo-container">
  
     <app-todo
+        #todoRef
+        [appHighlighed]="false"
         [todoData]="todoData"
         (onClickIcon)="getTodoInfo($event)"
+        (onTogglehighlighted)="onToggleHighlighted($event)"
     >
     <ng-template class="template-ref" [ngIf]="!todoData.hidden">
       <div class="name">Alex</div>
