@@ -5,6 +5,7 @@ import { TODO_DATA } from '../assets/todo';
 import { NTodo } from './models/todo.model';
 import { CommonModule } from '@angular/common';
 import { HighlighedDirective } from './directives/highlighed.directive';
+import { NgxUnlessDirective } from './directives/ngx-unless.directive';
 
 @Component({
   selector: 'app-root',
@@ -13,7 +14,8 @@ import { HighlighedDirective } from './directives/highlighed.directive';
     RouterOutlet,
     TodoComponent,
     CommonModule,
-    HighlighedDirective
+    HighlighedDirective,
+    NgxUnlessDirective
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
@@ -24,7 +26,7 @@ export class AppComponent implements AfterViewInit{
 
   constructor() {}
   ngAfterViewInit(): void {
-    console.log(this.highlighedDirective);
+    // console.log(this.highlighedDirective);
   }
 
   // @ViewChild(HighlighedDirective) highlighedDirective!: HighlighedDirective;
