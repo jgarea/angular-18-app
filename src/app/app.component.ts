@@ -1,12 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { TodoComponent } from './pages/todo/todo.component';
-import { TODO_DATA } from '../assets/todo';
 import { NTodo } from './models/todo.model';
 import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './pages/header/header.component';
-import { HttpClient, HttpClientModule, provideHttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
 import { ApiService } from './services/api.service';
 import { FormsModule } from '@angular/forms';
 
