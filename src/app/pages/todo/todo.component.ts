@@ -1,7 +1,9 @@
-import { Component, EventEmitter, Input, LOCALE_ID, Output, ViewEncapsulation } from '@angular/core';
+import { Component, EventEmitter, Inject, Input, LOCALE_ID, Output, ViewEncapsulation } from '@angular/core';
 import { NTodo } from '../../models/todo.model';
 import { CommonModule, registerLocaleData } from '@angular/common';
 import spanish from '@angular/common/locales/es';
+import { API_TOKEN } from '../../app.config';
+import { ApiService } from '../../services/api.service';
 registerLocaleData(spanish);
 
 @Component({
@@ -20,6 +22,12 @@ registerLocaleData(spanish);
   encapsulation: ViewEncapsulation.ShadowDom
 })
 export class TodoComponent {
+
+  constructor(
+    @Inject(API_TOKEN) private readonly apiService: ApiService
+  ) {
+    console.log('TodoComponent', this.apiService.instanceId);
+  }
   @Input({ required: true}) todoData!: NTodo.TodoData;
 
   @Output() onClickIcon = new EventEmitter<NTodo.TodoData>();

@@ -1,14 +1,18 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-
-@Injectable({
-  providedIn: 'root'
-})
+let instanceId = 0;
+@Injectable()
 export class ApiService {
+  
+  instanceId=0;
 
   constructor(
     private readonly http: HttpClient
-  ) { }
+  ) { 
+    instanceId++;
+    this.instanceId = instanceId;
+    console.log(instanceId)
+  }
 
   private readonly baseUrl = 'http://localhost:3000/todos';
 
@@ -37,3 +41,9 @@ export class ApiService {
     return this.http.delete<T>(this.baseUrl + '/' + id);
   }
 }
+
+function apiServiceConfig(http: HttpClient) {
+  return new ApiService(http);
+}
+
+

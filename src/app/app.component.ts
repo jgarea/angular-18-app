@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { TodoComponent } from './pages/todo/todo.component';
 import { NTodo } from './models/todo.model';
@@ -7,6 +7,7 @@ import { HeaderComponent } from './shared/header/header.component';
 import { ApiService } from './services/api.service';
 import { FormsModule } from '@angular/forms';
 import { HighlightedDirective } from './directives/highlighted.directive';
+import { API_TOKEN } from './app.config';
 
 @Component({
   selector: 'app-root',
@@ -26,8 +27,10 @@ export class AppComponent implements OnInit {
   todos: NTodo.TodosResponse = {totalRecords: 0, data: []};
 
   constructor(
-    private readonly apiService: ApiService
-  ) {}
+    @Inject(API_TOKEN) private readonly apiService: ApiService
+  ) {
+    console.log('AppComponent', this.apiService.instanceId);
+  }
 
   ngOnInit(): void {
     this.getTodos();
