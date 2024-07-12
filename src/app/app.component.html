@@ -5,11 +5,20 @@
         (onClickIcon)="getTodoInfo($event)"
     >
     </app-todo> -->
-    @for (item of (todos | async)?.data; track $index) {
+    <!-- @for (item of (todos | async)?.data; track $index) {
         <app-todo
             [todoData]="item"
             (onClickIcon)="getTodoInfo($event)"
         >
+        </app-todo>
+
+    } -->
+    @for (item of todos.data; track $index) {
+        <app-todo
+            [todoData]="item"
+            (onClickIcon)="getTodoInfo($event)"
+        >
+        <textarea rows="10" [(ngModel)]="item.description"(blur)="updateTodo(item)"></textarea>
         </app-todo>
 
     }
