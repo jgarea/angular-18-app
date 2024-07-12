@@ -4,6 +4,7 @@ import { TodoComponent } from './pages/todo/todo.component';
 import { TODO_DATA } from '../assets/todo';
 import { NTodo } from './models/todo.model';
 import { CommonModule } from '@angular/common';
+import { HeaderComponent } from './pages/header/header.component';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +12,8 @@ import { CommonModule } from '@angular/common';
   imports: [
     RouterOutlet,
     TodoComponent,
-    CommonModule
+    CommonModule,
+    HeaderComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
