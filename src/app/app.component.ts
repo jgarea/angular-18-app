@@ -6,6 +6,7 @@ import { NTodo } from './models/todo.model';
 import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './pages/header/header.component';
 import { HttpClient, HttpClientModule, provideHttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -21,7 +22,8 @@ import { HttpClient, HttpClientModule, provideHttpClient } from '@angular/common
   styleUrl: './app.component.scss'
 })
 export class AppComponent implements OnInit{
-  todos:NTodo.TodosResponse = {totalRecords: 0, data: []};
+  todos!: Observable<NTodo.TodosResponse> | undefined;
+  // todos:NTodo.TodosResponse = {totalRecords: 0, data: []};
 
   private readonly baseUrl='http://localhost:3000/todos';
 
@@ -30,7 +32,7 @@ export class AppComponent implements OnInit{
   ) {}
   ngOnInit(): void {
     // this.http.get(this.baseUrl).subscribe(console.log);
-    this.http.get<NTodo.TodosResponse>(this.baseUrl).subscribe(val=>this.todos = val);
+    this.todos=this.http.get<NTodo.TodosResponse>(this.baseUrl);
   }
 
   getTodoInfo(val: NTodo.TodoData) {
