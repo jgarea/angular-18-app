@@ -17,7 +17,7 @@ registerLocaleData(spanish);
   ],
   templateUrl: './todo.component.html',
   styleUrl: './todo.component.scss',
-  encapsulation: ViewEncapsulation.Emulated
+  encapsulation: ViewEncapsulation.ShadowDom
 })
 export class TodoComponent {
   @Input({ required: true}) todoData!: NTodo.TodoData;

@@ -3,9 +3,10 @@ import { RouterOutlet } from '@angular/router';
 import { TodoComponent } from './pages/todo/todo.component';
 import { NTodo } from './models/todo.model';
 import { CommonModule } from '@angular/common';
-import { HeaderComponent } from './pages/header/header.component';
+import { HeaderComponent } from './shared/header/header.component';
 import { ApiService } from './services/api.service';
 import { FormsModule } from '@angular/forms';
+import { HighlightedDirective } from './directives/highlighted.directive';
 
 @Component({
   selector: 'app-root',
@@ -15,37 +16,37 @@ import { FormsModule } from '@angular/forms';
     TodoComponent,
     CommonModule,
     HeaderComponent,
-    FormsModule
-
+    FormsModule,
+    HighlightedDirective
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
-export class AppComponent implements OnInit{
-  // todos!: Observable<NTodo.TodosResponse> | undefined;
-   todos:NTodo.TodosResponse = {totalRecords: 0, data: []};
-
+export class AppComponent implements OnInit {
+  todos: NTodo.TodosResponse = {totalRecords: 0, data: []};
 
   constructor(
-private readonly apiService: ApiService  ) {}
+    private readonly apiService: ApiService
+  ) {}
+
   ngOnInit(): void {
     this.getTodos();
   }
 
-  private getTodos(){
+  private getTodos() {
     this.apiService.get<NTodo.TodosResponse>().subscribe(val => this.todos = val);
   }
- 
 
   deleteTodo(item: NTodo.TodoData) {
-    this.apiService.delete<NTodo.TodosResponse>(item.id).subscribe(todos=> this.todos = todos);
+    this.apiService.delete<NTodo.TodosResponse>(item.id).subscribe(todos => this.todos = todos);
   }
 
-  updateTodo(item: NTodo.TodoData){
-    // this.apiService.put(item,item.id).subscribe(console.log);
-    this.apiService.patch({description: item.description},item.id).subscribe(console.log);
+  updateTodo(item : NTodo.TodoData) {
+    // this.apiService.put(item, item.id).subscribe(console.log);
+    this.apiService.patch({ description: item.description}, item.id).subscribe(console.log);
   }
-  addTodo(){
+
+  addTodo() {
     this.apiService.post({
       "title": "Leer documentación técnica",
       "description": "Investigar y leer la documentación de una nueva tecnología o herramienta relevante para el proyecto.",
@@ -63,7 +64,6 @@ private readonly apiService: ApiService  ) {}
         "priority": "low"
       },
       "progress": 0.2
-    }).subscribe(()=> this.getTodos());
-
+    }).subscribe(() => this.getTodos());
   }
 }
